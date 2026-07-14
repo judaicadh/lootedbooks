@@ -15,7 +15,7 @@ const pillStyle = (active: boolean) =>
     ))}
   </div>
 
-  <div data-src-grid style="margin-top:22px;display:grid;grid-template-columns:1fr 1fr;gap:16px">
+  <div data-src-grid class="col-stack" style="margin-top:22px;display:grid;grid-template-columns:1fr 1fr;gap:16px">
     {SOURCES.map((s) => (
       <div data-type={s.type} style="background:var(--sf);border:1px solid rgba(var(--inkrgb),.14);border-radius:4px;padding:18px 20px">
         <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px">

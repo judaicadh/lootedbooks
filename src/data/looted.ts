@@ -294,7 +294,6 @@ export const urls = {
   home: '/',
   about: '/about/',
   gaps: '/about/gaps/',
-  method: '/about/method/',
   steps: '/about/steps/',
   essay: '/about/essay/',
   markings: '/markings/',

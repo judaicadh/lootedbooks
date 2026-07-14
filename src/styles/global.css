@@ -3,21 +3,21 @@
    the ledger direction is the shipped one. Swapping these variables re-skins the
    whole site. */
 :root {
-  --pp: #f4f1ea;
-  --sf: #faf7f0;
-  --sf2: #efece3;
-  --sf3: #f2efe7;
-  --ink: #201d17;
-  --ink2: #4a4636;
-  --mut: #6c6558;
-  --fn: #9a9384;
-  --fn2: #b3ab9a;
-  --fn3: #8a8272;
-  --ac: #35506e;
-  --ac2: #25405c;
-  --inkrgb: 32, 29, 23;
-  --acrgb: 53, 80, 110;
-  --pprgb: 244, 241, 234;
+  --pp: #faf8f3;
+  --sf: #fffefb;
+  --sf2: #f3f0e9;
+  --sf3: #f7f4ed;
+  --ink: #211d16;
+  --ink2: #4c4735;
+  --mut: #6f6757;
+  --fn: #9c9585;
+  --fn2: #b6ae9c;
+  --fn3: #8c8474;
+  --ac: #35659e;
+  --ac2: #274c7d;
+  --inkrgb: 33, 29, 22;
+  --acrgb: 53, 101, 158;
+  --pprgb: 250, 248, 243;
   --serif: 'IBM Plex Serif', Georgia, serif;
   --sans: 'IBM Plex Sans', system-ui, sans-serif;
   --display: 'Oswald', sans-serif;

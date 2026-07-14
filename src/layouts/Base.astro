@@ -13,22 +13,17 @@ const { title, crumb, active = null } = Astro.props;
 const nav = (isActive: boolean) =>
   `appearance:none;background:none;border:none;padding:0 0 3px;cursor:pointer;font:${isActive ? 500 : 400} 12.5px/1 var(--sans);color:${isActive ? 'var(--ink)' : 'var(--mut)'};border-bottom:2px solid ${isActive ? 'var(--ac)' : 'transparent'}`;
 
-const items: { label: string; href: string; key: NonNullable<Props['active']> }[] = [
-  { label: 'Identify a book', href: urls.markings, key: 'markings' },
-  { label: 'How they were found', href: urls.cases, key: 'stories' },
-  { label: 'Browse the books', href: urls.register, key: 'register' },
-  { label: 'Sources & lists', href: urls.sources, key: 'sources' },
-];
-
-const aboutLinks = [
-  { label: 'Scope', href: urls.about },
-  { label: 'The method', href: urls.method },
+// "How we found them" groups all of Bruce Nielsen's process content;
+// "About" is just the framing (scope + what's missing).
+const foundLinks = [
+  { label: 'The stories', href: urls.cases },
   { label: 'The five steps', href: urls.steps },
   { label: 'The full essay (Bruce Nielsen)', href: urls.essay },
-  { label: 'What we cannot account for', href: urls.gaps },
-  { label: 'Where to look', href: urls.anatomy },
 ];
-const aboutActive = active === 'about';
+const aboutLinks = [
+  { label: 'Scope of this record', href: urls.about },
+  { label: 'What we cannot account for', href: urls.gaps },
+];
 const dropItem = 'display:block;padding:8px 12px;border-radius:5px;font:400 13px/1.35 var(--sans);color:var(--ink);text-decoration:none;white-space:nowrap';
 ---
 <html lang="en">
@@ -55,12 +50,18 @@ const dropItem = 'display:block;padding:8px 12px;border-radius:5px;font:400 13px
             <span style="font:400 10px/1 'IBM Plex Mono',monospace;letter-spacing:.14em;text-transform:uppercase;color:var(--mut)">at Penn Libraries</span>
           </a>
           <nav style="display:flex;flex-wrap:wrap;align-items:baseline;gap:12px 22px">
-            {items.map((it) => (
-              <a href={it.href} style={nav(active === it.key)}>{it.label}</a>
-            ))}
+            <a href={urls.markings} style={nav(active === 'markings')}>Identify a book</a>
             <details class="about-menu" style="position:relative">
-              <summary style={`${nav(aboutActive)};cursor:pointer;list-style:none`}>About ▾</summary>
-              <div style="position:absolute;right:0;top:calc(100% + 10px);min-width:230px;background:var(--pp);border:1px solid rgba(var(--inkrgb),.18);border-radius:7px;box-shadow:0 8px 24px rgba(var(--inkrgb),.16);padding:6px;z-index:40;display:flex;flex-direction:column;gap:1px">
+              <summary style={`${nav(active === 'stories')};cursor:pointer;list-style:none`}>How we found them ▾</summary>
+              <div style="position:absolute;left:0;top:calc(100% + 10px);min-width:250px;background:var(--pp);border:1px solid rgba(var(--inkrgb),.18);border-radius:7px;box-shadow:0 8px 24px rgba(var(--inkrgb),.16);padding:6px;z-index:40;display:flex;flex-direction:column;gap:1px">
+                {foundLinks.map((l) => (<a href={l.href} style={dropItem}>{l.label}</a>))}
+              </div>
+            </details>
+            <a href={urls.register} style={nav(active === 'register')}>Browse the books</a>
+            <a href={urls.sources} style={nav(active === 'sources')}>Sources &amp; lists</a>
+            <details class="about-menu" style="position:relative">
+              <summary style={`${nav(active === 'about')};cursor:pointer;list-style:none`}>About ▾</summary>
+              <div style="position:absolute;right:0;top:calc(100% + 10px);min-width:250px;background:var(--pp);border:1px solid rgba(var(--inkrgb),.18);border-radius:7px;box-shadow:0 8px 24px rgba(var(--inkrgb),.16);padding:6px;z-index:40;display:flex;flex-direction:column;gap:1px">
                 {aboutLinks.map((l) => (<a href={l.href} style={dropItem}>{l.label}</a>))}
               </div>
             </details>

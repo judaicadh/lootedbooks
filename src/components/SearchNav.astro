@@ -1,0 +1,23 @@
+---
+import { urls } from '../data/looted';
+
+export interface Props {
+  active: 'stories' | 'steps' | 'essay';
+}
+const { active } = Astro.props;
+
+const items = [
+  { label: 'The stories', href: urls.cases, key: 'stories' },
+  { label: 'The five steps', href: urls.steps, key: 'steps' },
+  { label: 'The full essay', href: urls.essay, key: 'essay' },
+];
+---
+<nav style="display:flex;flex-wrap:wrap;gap:9px 20px;margin:0 0 30px;padding-bottom:16px;border-bottom:1px solid rgba(var(--inkrgb),.14)">
+  <span style="font:500 10.5px/1 'IBM Plex Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--fn)">How we found them</span>
+  {items.map((it) => (
+    <a
+      href={it.href}
+      style={`font:${active === it.key ? 500 : 400} 12.5px/1 var(--sans);color:${active === it.key ? 'var(--ink)' : 'var(--ac)'};text-decoration:none;border-bottom:2px solid ${active === it.key ? 'var(--ac)' : 'transparent'};padding-bottom:3px`}
+    >{it.label}</a>
+  ))}
+</nav>

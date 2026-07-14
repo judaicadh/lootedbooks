@@ -9,3 +9,11 @@
 {"message":" astro  v7.0.8 ready in 2068 ms\n┃ Local    http://localhost:4399/\n┃ Network  use --host to expose","label":"SKIP_FORMAT","level":"info"}
 {"message":"watching for file changes...","label":null,"level":"info"}
 {"message":"[200] /register/ 48ms","label":null,"level":"info"}
+{"message":"[200] / 11ms","label":null,"level":"info"}
+{"message":"[200] / 1ms","label":null,"level":"info"}
+{"message":"[200] /register/ 33ms","label":null,"level":"info"}
+{"message":"/src/styles/global.css","label":"watch","level":"info"}
+{"message":"[200] /register/ 86ms","label":null,"level":"info"}
+{"message":"items is not defined\n  Stack trace:\n    at eval (/Users/lauraeck/Github/lootedbooks/src/layouts/Base.astro:53:14)\n    [...] See full stack trace in the browser, or rerun with --verbose.","label":null,"level":"error"}
+{"message":"[200] /register/ 50ms","label":null,"level":"info"}
+{"message":"[200] /register/ 36ms","label":null,"level":"info"}

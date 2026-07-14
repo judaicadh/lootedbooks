@@ -43,8 +43,8 @@ const tierDot = (t: string) => {
       <h1 style="margin:14px 0 0;font:400 33px/1.05 var(--display);text-transform:uppercase;letter-spacing:.02em">The register</h1>
       <p style="margin:10px 0 0;max-width:520px;font:400 15px/1.5 var(--serif);color:var(--mut)">Ordered by strength of evidence, strongest first. Filter by the facets; nothing is hidden behind a search box. Prefer a visual? <a href={urls.shelf}>See the shelf →</a></p>
     </div>
-    <div style="display:flex;gap:12px;align-items:center">
-      <input data-query placeholder="find a title, owner, place…" style="width:230px;padding:9px 12px;border:1px solid rgba(var(--inkrgb),.22);border-radius:3px;background:var(--sf);font:400 13px/1 var(--sans);color:var(--ink)" />
+    <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap">
+      <input data-query placeholder="find a title, owner, place…" style="width:230px;max-width:100%;padding:9px 12px;border:1px solid rgba(var(--inkrgb),.22);border-radius:3px;background:var(--sf);font:400 13px/1 var(--sans);color:var(--ink)" />
       <a href={urls.download} style="text-decoration:none;border:1px solid rgba(var(--inkrgb),.22);border-radius:3px;padding:9px 12px;font:400 12.5px/1 var(--sans);color:var(--ac)">Download ↓</a>
     </div>
   </div>
