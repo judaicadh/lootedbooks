@@ -7,7 +7,9 @@ export function getStaticPaths() {
 }
 
 const { kase } = Astro.props;
-const recordHref = kase.recordId ? urls.record(kase.recordId) : urls.gaps;
+const recordHref = kase.recordId
+  ? urls.record(kase.recordId)
+  : (kase.recordLabel.toLowerCase().includes('gaps') ? urls.gaps : urls.register);
 ---
 <Base title={`${kase.title} — Nazi Looted Books`} crumb={`/cases/${kase.slug}/`} active="cases">
   <div style="max-width:680px">

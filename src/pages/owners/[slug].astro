@@ -1,16 +1,14 @@
 ---
 import Base from '../../layouts/Base.astro';
-import { urls, OWNERS, RECORDS, FEATURED } from '../../data/looted';
+import { urls, OWNERS, RECORDS } from '../../data/looted';
 
 export function getStaticPaths() {
   return Object.values(OWNERS).map((o) => ({ params: { slug: o.slug }, props: { owner: o } }));
 }
 
 const { owner } = Astro.props;
-const books = owner.bookIds.map((id) => {
-  const b = RECORDS.find((x) => x.id === id) || FEATURED[id];
-  return { id, title: b ? b.title : id };
-});
+// Books are derived live from records that carry this owner's slug.
+const books = RECORDS.filter((r) => r.ownerSlug === owner.slug).map((r) => ({ id: r.id, title: r.title }));
 ---
 <Base title={`${owner.name} — former owner`} crumb={`/owners/${owner.slug}/`} active="register">
   <div style="max-width:760px">
