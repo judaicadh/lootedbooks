@@ -113,8 +113,8 @@ export const MARKINGS: Mark[] = [
     obscured: 'torn out, or a surviving fragment', note: 'Pohl, a Catholic priest turned NSDAP Hebraist, ran the January 1942 looting of the Vilnius libraries: he shipped the most valuable books to the planned Nazi museum in Frankfurt and sold the rest to a paper mill.',
     bodyFull: 'Johannes Pohl, for the Einsatzstab Reichsleiter Rosenberg', bencowitz: '—' },
   { slug: 'disinf', name: 'Disinfection stamp', body: 'Offenbach intake', where: 'Flyleaf and title-page verso', count: 93, hue: 200,
-    desc: '“desinf. Lk. Sept 45” and similar — applied when books were fumigated on intake at the depot. A small, bureaucratic mark that reliably dates the book’s passage through Offenbach.',
-    obscured: 'overstamped', note: 'Not a provenance mark in itself, but a firm tie to the Offenbach timeline.',
+    desc: '“desinf. Lk. Sept 45” — desinfektion Landkreis, September 1945: fumigated against mould and insects in the administrative district. When it sits on the flyleaf verso rather than the board, the binding was already gone at the time of treatment.',
+    obscured: 'overstamped', note: 'Not a provenance mark in itself, but a firm tie to the Offenbach timeline; occasionally it is the only OAD evidence a book still carries.',
     bodyFull: 'Offenbach Archival Depot, intake', bencowitz: '—' },
   { slug: 'ajdc', name: 'AJDC Library stamp', body: 'the “Joint”', where: 'Inside back board (lower) / rear cover', count: 17, hue: 210,
     desc: 'The stamp “A.J.D.C. LIBRARY — NOT TO BE REMOVED FROM THE PREMISES,” applied to some of the roughly twenty thousand books the American Jewish Joint Distribution Committee borrowed from Offenbach for use in the Displaced Persons camps of the American Zone.',
@@ -122,8 +122,8 @@ export const MARKINGS: Mark[] = [
     bodyFull: 'American Jewish Joint Distribution Committee', bencowitz: '—' },
   { slug: 'owner', name: 'Pre-war owner stamps', body: 'personal & institutional', where: 'Throughout — title page, boards, flyleaf', count: 1034, hue: 40,
     desc: 'The stamps and bookplates of the people and institutions who owned these books before they were taken — synagogues, schools, community libraries, and private collectors.',
-    obscured: 'under a later bookplate', note: 'The mark that can name an owner, and the one most often deliberately covered over.',
-    bodyFull: 'Various pre-war owners', bencowitz: 'partly in Bencowitz (1946), vol. II' },
+    obscured: 'under a later bookplate', note: 'The mark that can name an owner, and the one most often deliberately covered over — checked against Yad Vashem, the Wiesbaden privately-owned-collections list, and community records.',
+    bodyFull: 'Various pre-war owners', bencowitz: 'Bencowitz, Library Markings (1946), vols. I–II, NLI' },
 ];
 
 export const STEPS: Step[] = [
