@@ -1,0 +1,37 @@
+---
+import Base from '../../layouts/Base.astro';
+import { EDITIONS } from '../../data/looted';
+
+const formats = [
+  { name: 'CSV', body: 'Flat table, one row per volume. 2,614 rows.', action: 'download ↓' },
+  { name: 'JSON', body: 'Nested evidence chains, for reuse in other systems.', action: 'download ↓' },
+  { name: 'DOI', body: '10.5072/penn-looted-books. Cite the edition.', action: 'copy ⧉' },
+];
+---
+<Base title="Download the register — Nazi Looted Books" crumb="/register/download/" active="register">
+  <div style="max-width:760px">
+    <h1 style="margin:14px 0 0;font:400 33px/1.05 var(--display);text-transform:uppercase;letter-spacing:.02em">Download the register</h1>
+    <p style="margin:16px 0 0;font:400 16.5px/1.55 var(--serif);color:var(--mut)">The full dataset is open. Each edition is versioned and citable, so a claim you make against it today can be checked against the same rows tomorrow.</p>
+
+    <div style="margin-top:26px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px">
+      {formats.map((f) => (
+        <div style="background:var(--sf);border:1px solid rgba(var(--inkrgb),.14);border-radius:4px;padding:18px 20px">
+          <div style="font:500 15px/1 var(--sans);color:var(--ink)">{f.name}</div>
+          <div style="margin-top:7px;font:400 12.5px/1.5 var(--serif);color:var(--mut)">{f.body}</div>
+          <div style="margin-top:12px;font:400 12px/1 'IBM Plex Mono',monospace;color:var(--ac)">{f.action}</div>
+        </div>
+      ))}
+    </div>
+
+    <div style="margin-top:30px;font:500 11px/1 'IBM Plex Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--mut)">Edition history</div>
+    <div style="margin-top:12px;border-top:1px solid rgba(var(--inkrgb),.14)">
+      {EDITIONS.map((e) => (
+        <div style="display:grid;grid-template-columns:120px 90px 1fr;gap:18px;align-items:baseline;padding:12px 2px;border-bottom:1px solid rgba(var(--inkrgb),.12)">
+          <span style="font:500 12.5px/1 'IBM Plex Mono',monospace;color:var(--ink)">{e.ver}</span>
+          <span style="font:400 12px/1 'IBM Plex Mono',monospace;color:var(--fn)">{e.date}</span>
+          <span style="font:400 13.5px/1.4 var(--serif);color:var(--mut)">{e.note}</span>
+        </div>
+      ))}
+    </div>
+  </div>
+</Base>

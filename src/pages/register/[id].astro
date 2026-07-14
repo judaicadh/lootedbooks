@@ -1,3 +1,81 @@
 ---
+import Base from '../../layouts/Base.astro';
+import { urls, RECORDS, TIERS, SERIES, chip, evRowStyle } from '../../data/looted';
 
+export function getStaticPaths() {
+  return RECORDS.map((r) => ({ params: { id: r.id }, props: { record: r } }));
+}
+
+const { record } = Astro.props;
+const tierBoxStyle = 'margin-top:26px;padding:18px 20px;border-radius:4px;' +
+  (record.tier === 'possible'
+    ? 'background:var(--sf3);border:1px dotted rgba(var(--inkrgb),.34)'
+    : 'background:var(--sf);border:1px solid rgba(var(--inkrgb),.16)');
 ---
+<Base title={`${record.title} — the register`} crumb={`/register/${record.id}/`} active="register">
+  <div style="max-width:820px">
+    <a href={urls.register} style="font:400 12.5px/1 var(--sans);color:var(--ac)">← The register</a>
+
+    <div style="margin-top:16px;display:flex;justify-content:space-between;align-items:flex-start;gap:24px">
+      <div>
+        <div style="font:400 11px/1 'IBM Plex Mono',monospace;color:var(--fn)">Register no. {record.id}</div>
+        <h1 style="margin:8px 0 0;font:400 30px/1.22 var(--serif);letter-spacing:-.01em;max-width:560px;text-wrap:pretty">{record.title}</h1>
+        <div style="margin-top:8px;font:400 15px/1.5 var(--serif);color:var(--mut)">{record.bib}</div>
+      </div>
+      <span style={chip(record.tier)}>{TIERS[record.tier].label}</span>
+    </div>
+
+    <div style="margin-top:32px;font:500 11px/1 'IBM Plex Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--mut)">The evidence</div>
+    <p style="margin:8px 0 0;max-width:600px;font:400 14px/1.5 var(--serif);font-style:italic;color:var(--fn)">Each row is one thing we can point to in the book, and what corroborates it outside the book. The chain is the record.</p>
+
+    <div style="margin-top:18px;display:flex;flex-direction:column;gap:14px">
+      {record.evidence.map((e) => (
+        <div style={evRowStyle(e.kind)}>
+          <div style="display:grid;grid-template-columns:150px 1fr;gap:18px 22px">
+            <div style="font:500 10.5px/1.5 'IBM Plex Mono',monospace;letter-spacing:.06em;text-transform:uppercase;color:var(--fn)">What</div>
+            <div style="font:400 15px/1.4 var(--serif);color:var(--ink)">
+              {e.whatSlug
+                ? (<a href={urls.marking(e.whatSlug)}>{e.what}</a>)
+                : (<span>{e.what}</span>)}
+            </div>
+
+            <div style="font:500 10.5px/1.5 'IBM Plex Mono',monospace;letter-spacing:.06em;text-transform:uppercase;color:var(--fn)">Where in the book</div>
+            <div style="font:400 14.5px/1.4 var(--serif);color:var(--ink)"><a href={urls.anatomy}>{e.where}</a></div>
+
+            <div style="font:500 10.5px/1.5 'IBM Plex Mono',monospace;letter-spacing:.06em;text-transform:uppercase;color:var(--fn)">What it says</div>
+            <div style="font:400 14.5px/1.5 'IBM Plex Mono',monospace;color:var(--ink)">“{e.says}”</div>
+
+            <div style="font:500 10.5px/1.5 'IBM Plex Mono',monospace;letter-spacing:.06em;text-transform:uppercase;color:var(--fn)">Corroborated by</div>
+            <div style="font:400 14.5px/1.4 var(--serif);color:var(--ink)">{e.source} <span style="color:var(--ac)">↗</span></div>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <div style={tierBoxStyle}>
+      <div style="font:500 10.5px/1 'IBM Plex Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--fn)">Confidence — {TIERS[record.tier].label}</div>
+      <p style="margin:9px 0 0;font:400 15.5px/1.55 var(--serif);color:var(--ink)">{record.tierWhy}</p>
+    </div>
+
+    <div style="margin-top:28px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:22px;padding-top:22px;border-top:1px solid rgba(var(--inkrgb),.14)">
+      <div>
+        <div style="font:500 10.5px/1 'IBM Plex Mono',monospace;letter-spacing:.06em;text-transform:uppercase;color:var(--fn)">Catalog record</div>
+        <div style="margin-top:6px;font:400 14px/1.4 var(--serif);color:var(--ink)">{record.catalog}</div>
+      </div>
+      <div>
+        <div style="font:500 10.5px/1 'IBM Plex Mono',monospace;letter-spacing:.06em;text-transform:uppercase;color:var(--fn)">Series</div>
+        <div style="margin-top:6px;font:400 14px/1.4 var(--serif);color:var(--ink)">{SERIES[record.series]}</div>
+      </div>
+      <div>
+        <div style="font:500 10.5px/1 'IBM Plex Mono',monospace;letter-spacing:.06em;text-transform:uppercase;color:var(--fn)">Former owner</div>
+        <div style="margin-top:6px;font:400 14px/1.4 var(--serif);color:var(--ink)">
+          {record.ownerSlug
+            ? (<a href={urls.owner(record.ownerSlug)}>{record.owner}</a>)
+            : record.owner
+              ? (<span>{record.owner}</span>)
+              : (<span style="color:var(--fn)">not identified</span>)}
+        </div>
+      </div>
+    </div>
+  </div>
+</Base>

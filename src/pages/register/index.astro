@@ -1,3 +1,202 @@
 ---
+import Base from '../../layouts/Base.astro';
+import { urls, RECORDS, TIERS, SERIES, MARK_NAMES, COUNTRIES, chip, leftBorder } from '../../data/looted';
+import type { TierKey } from '../../data/looted';
 
+const countIf = (fn: (r: typeof RECORDS[number]) => boolean) => RECORDS.filter(fn).length;
+
+const tierKeys = Object.keys(TIERS) as TierKey[];
+const seriesKeys = Object.keys(SERIES);
+const markKeys = ['oad', 'jcr', 'owner', 'err', 'disinf', 'ajdc'];
+
+const fTiers = tierKeys.map((t) => ({ value: t, label: TIERS[t].label, count: countIf((x) => x.tier === t) }));
+const fSeries = seriesKeys.map((k) => ({ value: k, label: SERIES[k], count: countIf((x) => x.series === k) }));
+const fMarks = markKeys.map((m) => ({ value: m, label: MARK_NAMES[m], count: countIf((x) => x.marks.includes(m)) }));
+const fCountries = COUNTRIES.map((c) => ({ value: c, label: c, count: countIf((x) => x.country === c) }));
+
+// sorted strongest-evidence first
+const sorted = RECORDS.slice().sort((a, b) => TIERS[a.tier].order - TIERS[b.tier].order);
+
+const facetStyle = (active: boolean) =>
+  `appearance:none;cursor:pointer;background:${active ? 'rgba(var(--acrgb),.1)' : 'none'};border:none;border-radius:3px;padding:6px 8px;display:flex;justify-content:space-between;align-items:center;gap:8px;text-align:left;font:${active ? 500 : 400} 12.5px/1.3 var(--sans);color:${active ? 'var(--ac2)' : 'var(--ink2)'}`;
+const boolStyle = (active: boolean) =>
+  `appearance:none;cursor:pointer;background:${active ? 'rgba(var(--acrgb),.1)' : 'none'};border:none;border-radius:3px;padding:7px 8px;text-align:left;font:${active ? 500 : 400} 12.5px/1.3 var(--sans);color:${active ? 'var(--ac2)' : 'var(--ink2)'}`;
+const groupLabel = 'font:500 10.5px/1 \'IBM Plex Mono\',monospace;letter-spacing:.06em;text-transform:uppercase;color:var(--fn);margin-bottom:9px';
+
+const facetGroups = [
+  { facet: 'tier', label: 'Confidence tier', items: fTiers, dot: true },
+  { facet: 'series', label: 'Series', items: fSeries, dot: false },
+  { facet: 'mark', label: 'Marking type', items: fMarks, dot: false },
+  { facet: 'country', label: 'Origin', items: fCountries, dot: false },
+];
+const tierDot = (t: string) => {
+  const base = 'width:8px;height:8px;border-radius:2px;flex:none;';
+  if (t === 'direct') return base + 'background:var(--ink)';
+  if (t === 'namelist') return base + 'background:rgba(var(--inkrgb),.5)';
+  if (t === 'context') return base + 'background:none;border:1px dashed rgba(var(--inkrgb),.5)';
+  return base + 'background:none;border:1px dotted rgba(var(--inkrgb),.45)';
+};
 ---
+<Base title="The register — Nazi Looted Books" crumb="/register/" active="register">
+  <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap">
+    <div>
+      <h1 style="margin:14px 0 0;font:400 33px/1.05 var(--display);text-transform:uppercase;letter-spacing:.02em">The register</h1>
+      <p style="margin:10px 0 0;max-width:520px;font:400 15px/1.5 var(--serif);color:var(--mut)">Ordered by strength of evidence, strongest first. Filter by the facets; nothing is hidden behind a search box.</p>
+    </div>
+    <div style="display:flex;gap:12px;align-items:center">
+      <input data-query placeholder="find a title, owner, place…" style="width:230px;padding:9px 12px;border:1px solid rgba(var(--inkrgb),.22);border-radius:3px;background:var(--sf);font:400 13px/1 var(--sans);color:var(--ink)" />
+      <a href={urls.download} style="text-decoration:none;border:1px solid rgba(var(--inkrgb),.22);border-radius:3px;padding:9px 12px;font:400 12.5px/1 var(--sans);color:var(--ac)">Download ↓</a>
+    </div>
+  </div>
+
+  <div style="margin-top:26px;display:grid;grid-template-columns:236px 1fr;gap:38px;align-items:start">
+    <aside data-rail style="position:sticky;top:74px">
+      <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:14px">
+        <span style="font:500 11px/1 'IBM Plex Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--mut)">Filters</span>
+        <button type="button" data-clear style="appearance:none;background:none;border:none;padding:0;cursor:pointer;font:400 11.5px/1 var(--sans);color:var(--ac)">Clear</button>
+      </div>
+
+      {facetGroups.map((g) => (
+        <div style="margin-bottom:20px">
+          <div style={groupLabel}>{g.label}</div>
+          <div style="display:flex;flex-direction:column;gap:2px">
+            {g.items.map((it) => (
+              <button type="button" data-facet={g.facet} data-value={it.value} style={facetStyle(false)}>
+                <span style="display:flex;align-items:center;gap:8px">
+                  {g.dot && (<span style={tierDot(it.value)}></span>)}
+                  {it.label}
+                </span>
+                <span style="font:400 11px/1 'IBM Plex Mono',monospace;color:var(--fn)">{it.count}</span>
+              </button>
+            ))}
+          </div>
+        </div>
+      ))}
+
+      <div style="display:flex;flex-direction:column;gap:2px">
+        <button type="button" data-bool="owner" style={boolStyle(false)}><span>Has an identified owner</span></button>
+        <button type="button" data-bool="catalog" style={boolStyle(false)}><span>In the library catalog</span></button>
+      </div>
+    </aside>
+
+    <div style="min-width:0">
+      <div style="display:flex;justify-content:space-between;align-items:baseline;padding-bottom:10px;border-bottom:1px solid rgba(var(--inkrgb),.16)">
+        <span style="font:500 12px/1 'IBM Plex Mono',monospace;color:var(--ink)"><span data-count>{sorted.length}</span> <span style="color:var(--fn)">records</span></span>
+        <span style="font:400 11px/1 'IBM Plex Mono',monospace;color:var(--fn)">sorted: strongest evidence first</span>
+      </div>
+
+      <div data-results>
+        {sorted.map((r) => (
+          <a
+            href={urls.record(r.id)}
+            data-row
+            data-tier={r.tier}
+            data-series={r.series}
+            data-marks={r.marks.join(' ')}
+            data-country={r.country}
+            data-owner={r.owner ? '1' : '0'}
+            data-catalog={r.inCatalog ? '1' : '0'}
+            data-text={`${r.title} ${r.owner || ''} ${r.city} ${r.country} ${r.id}`.toLowerCase()}
+            style="text-decoration:none;border-bottom:1px solid rgba(var(--inkrgb),.12);padding:16px 4px;display:grid;grid-template-columns:1fr 190px;gap:20px;align-items:baseline"
+          >
+            <div style={leftBorder(r.tier)}>
+              <div style="font:500 16px/1.3 var(--serif);color:var(--ink)">{r.title}</div>
+              <div style="margin-top:3px;font:400 13px/1.4 var(--sans);color:var(--mut)">{r.bib}</div>
+              <div style="margin-top:7px;font:400 11.5px/1 'IBM Plex Mono',monospace;color:var(--fn)">{r.marks.length ? r.marks.map((m) => MARK_NAMES[m]).join(' · ') : 'no surviving marking'}</div>
+            </div>
+            <div style="display:flex;flex-direction:column;align-items:flex-end;gap:7px">
+              <span style={chip(r.tier)}>{TIERS[r.tier].label}</span>
+              <span style="font:400 11px/1 'IBM Plex Mono',monospace;color:var(--fn)">{r.inCatalog ? 'in catalog' : 'not in catalog'}</span>
+            </div>
+          </a>
+        ))}
+      </div>
+
+      <p data-empty style="display:none;margin:24px 0 0;font:400 15px/1.5 var(--serif);font-style:italic;color:var(--mut)">No records match these filters. That may mean none exist — or that the book is among those we have not yet placed. See <a href={urls.gaps}>Gaps</a>.</p>
+    </div>
+  </div>
+</Base>
+
+<script is:inline>
+  (function () {
+    const rail = document.querySelector('[data-rail]');
+    const results = document.querySelector('[data-results]');
+    if (!rail || !results) return;
+    const rows = Array.from(results.querySelectorAll('[data-row]'));
+    const countEl = document.querySelector('[data-count]');
+    const emptyEl = document.querySelector('[data-empty]');
+    const queryEl = document.querySelector('[data-query]');
+
+    const state = { tier: new Set(), series: new Set(), mark: new Set(), country: new Set(), owner: false, catalog: false, q: '' };
+
+    const facetBtns = Array.from(rail.querySelectorAll('[data-facet]'));
+    const boolBtns = Array.from(rail.querySelectorAll('[data-bool]'));
+
+    const facetStyle = (active) =>
+      `appearance:none;cursor:pointer;background:${active ? 'rgba(var(--acrgb),.1)' : 'none'};border:none;border-radius:3px;padding:6px 8px;display:flex;justify-content:space-between;align-items:center;gap:8px;text-align:left;font:${active ? 500 : 400} 12.5px/1.3 var(--sans);color:${active ? 'var(--ac2)' : 'var(--ink2)'}`;
+    const boolStyle = (active) =>
+      `appearance:none;cursor:pointer;background:${active ? 'rgba(var(--acrgb),.1)' : 'none'};border:none;border-radius:3px;padding:7px 8px;text-align:left;font:${active ? 500 : 400} 12.5px/1.3 var(--sans);color:${active ? 'var(--ac2)' : 'var(--ink2)'}`;
+
+    function apply() {
+      let shown = 0;
+      rows.forEach((row) => {
+        const tier = row.getAttribute('data-tier');
+        const series = row.getAttribute('data-series');
+        const marks = (row.getAttribute('data-marks') || '').split(' ').filter(Boolean);
+        const country = row.getAttribute('data-country');
+        const hasOwner = row.getAttribute('data-owner') === '1';
+        const inCat = row.getAttribute('data-catalog') === '1';
+        const text = row.getAttribute('data-text') || '';
+        let ok = true;
+        if (state.tier.size && !state.tier.has(tier)) ok = false;
+        if (ok && state.series.size && !state.series.has(series)) ok = false;
+        if (ok && state.mark.size && ![...state.mark].some((m) => marks.includes(m))) ok = false;
+        if (ok && state.country.size && !state.country.has(country)) ok = false;
+        if (ok && state.owner && !hasOwner) ok = false;
+        if (ok && state.catalog && !inCat) ok = false;
+        if (ok && state.q && text.indexOf(state.q) === -1) ok = false;
+        row.style.display = ok ? '' : 'none';
+        if (ok) shown++;
+      });
+      if (countEl) countEl.textContent = String(shown);
+      if (emptyEl) emptyEl.style.display = shown === 0 ? '' : 'none';
+    }
+
+    function syncButtons() {
+      facetBtns.forEach((b) => {
+        const set = state[b.getAttribute('data-facet')];
+        b.setAttribute('style', facetStyle(set.has(b.getAttribute('data-value'))));
+      });
+      boolBtns.forEach((b) => b.setAttribute('style', boolStyle(state[b.getAttribute('data-bool')])));
+    }
+
+    facetBtns.forEach((b) => b.addEventListener('click', () => {
+      const set = state[b.getAttribute('data-facet')];
+      const val = b.getAttribute('data-value');
+      if (set.has(val)) set.delete(val); else set.add(val);
+      syncButtons(); apply();
+    }));
+    boolBtns.forEach((b) => b.addEventListener('click', () => {
+      const key = b.getAttribute('data-bool');
+      state[key] = !state[key];
+      syncButtons(); apply();
+    }));
+    if (queryEl) queryEl.addEventListener('input', (e) => { state.q = e.target.value.trim().toLowerCase(); apply(); });
+
+    const clearBtn = document.querySelector('[data-clear]');
+    if (clearBtn) clearBtn.addEventListener('click', () => {
+      state.tier.clear(); state.series.clear(); state.mark.clear(); state.country.clear();
+      state.owner = false; state.catalog = false; state.q = '';
+      if (queryEl) queryEl.value = '';
+      syncButtons(); apply();
+    });
+
+    // deep-link from a marking page: ?mark=oad, ?tier=direct
+    const params = new URLSearchParams(location.search);
+    ['tier', 'mark'].forEach((k) => {
+      const v = params.get(k);
+      if (v && state[k]) state[k].add(v);
+    });
+    syncButtons(); apply();
+  })();
+</script>

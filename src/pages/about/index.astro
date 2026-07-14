@@ -1,3 +1,34 @@
 ---
+import Base from '../../layouts/Base.astro';
+import { urls } from '../../data/looted';
 
+const covers = [
+  'Volumes with a physical marking tying them to Offenbach, ERR, or a named pre-war owner.',
+  'Volumes inferred from name-list matches or documentary context, recorded at a lower confidence.',
+  'Empty bindings whose textblocks are shelved elsewhere, and textblocks separated from their bindings.',
+];
 ---
+<Base title="Scope of this record — Nazi Looted Books" crumb="/about/" active="about">
+  <div style="max-width:680px">
+    <h1 style="margin:14px 0 0;font:400 33px/1.05 var(--display);text-transform:uppercase;letter-spacing:.02em">Scope of this record</h1>
+    <p style="margin:20px 0 0;font:400 18px/1.6 var(--serif);color:var(--ink)">This register covers books held by the Penn Libraries that were looted by the Nazis — most of them from the former Dropsie College collection, distributed after the war by Jewish Cultural Reconstruction, Inc. from the Offenbach Archival Depot.</p>
+
+    <h2 style="margin:34px 0 0;font:500 13px/1 'IBM Plex Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--mut)">What it covers</h2>
+    <ul style="margin:14px 0 0;padding-left:20px;font:400 15.5px/1.7 var(--serif);color:var(--ink)">
+      {covers.map((c) => (<li>{c}</li>))}
+    </ul>
+
+    <h2 style="margin:30px 0 0;font:500 13px/1 'IBM Plex Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--mut)">What it does not cover</h2>
+    <ul style="margin:14px 0 0;padding-left:20px;font:400 15.5px/1.7 var(--serif);color:var(--mut)">
+      <li>Books acquired by ordinary purchase or gift with no looting history.</li>
+      <li>Collections at other Penn schools and museums outside the Libraries.</li>
+      <li>The estimated shipment total not yet located — that count lives on the <a href={urls.gaps}>Gaps</a> page, deliberately.</li>
+    </ul>
+
+    <div style="margin-top:30px;display:flex;flex-wrap:wrap;gap:20px;font:400 13px/1 var(--sans)">
+      <a href={urls.gaps}>What we cannot account for →</a>
+      <a href={urls.claims}>Restitution &amp; claims →</a>
+      <a href={urls.steps}>The method →</a>
+    </div>
+  </div>
+</Base>

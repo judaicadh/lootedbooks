@@ -1,3 +1,28 @@
 ---
+import Base from '../../layouts/Base.astro';
 
+const rows = [
+  { big: '2,391–5,549', head: 'Believed sent, per Offenbach shipping records', body: 'Two surviving tallies disagree. We hold ~2,100. The difference — somewhere between three hundred and three-and-a-half thousand volumes — was dispersed, destroyed, or is shelved unrecognised.' },
+  { big: '~250–300', head: '“Maybe” cases not yet placed', body: 'Books with a faint mark, an ambiguous inscription, or a catalog note but no surviving stamp. Held in a working list, not yet in the register.' },
+  { big: 'unknown', head: 'Shelves never surveyed', body: 'The identification came from shelf-reading. Whole classes of the collection have not yet been read against the databases. We cannot state how many looted books remain unread — only that some do.' },
+];
 ---
+<Base title="What we cannot account for — Nazi Looted Books" crumb="/about/gaps/" active="about">
+  <div style="max-width:720px">
+    <h1 style="margin:14px 0 0;font:400 33px/1.05 var(--display);text-transform:uppercase;letter-spacing:.02em">What we cannot account for</h1>
+    <p style="margin:20px 0 0;font:400 18px/1.6 var(--serif);color:var(--ink)">Most institutional registers stop at what they hold. This one keeps a page for what it does not. The numbers below are not failures to hide in a footnote; they are part of the record.</p>
+
+    <div style="margin-top:34px;border-top:1px solid rgba(var(--inkrgb),.14)">
+      {rows.map((r) => (
+        <div style="display:grid;grid-template-columns:150px 1fr;gap:24px;padding:22px 0;border-bottom:1px solid rgba(var(--inkrgb),.14)">
+          <div style="font:400 30px/1 var(--serif);color:var(--fn3)">{r.big}</div>
+          <div>
+            <div style="font:500 15px/1.4 var(--sans);color:var(--ink)">{r.head}</div>
+            <p style="margin:6px 0 0;font:400 14.5px/1.55 var(--serif);color:var(--mut)">{r.body}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+    <p style="margin:26px 0 0;font:400 15px/1.6 var(--serif);font-style:italic;color:var(--mut)">This is a page you can cite. If you are searching for a specific book and do not find it here, its absence may mean it was never sent, or it may mean we have not found it yet. We would rather you know which.</p>
+  </div>
+</Base>

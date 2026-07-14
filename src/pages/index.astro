@@ -1,17 +1,49 @@
 ---
+import Base from '../layouts/Base.astro';
+import { urls } from '../data/looted';
 
+const links = [
+  { n: '01', href: urls.markings, title: 'Identify looted books in your own collection', body: 'A visual guide to every marking these books carry, and where in the book they hide.' },
+  { n: '02', href: urls.cases, title: 'How these books were found', body: 'A fifteen-year search, told through the cases that turned on a single stamp.' },
+  { n: '03', href: urls.register, title: 'What Penn holds', body: 'Browse the full register, ordered by the strength of the evidence.' },
+];
+const quick = [
+  { href: urls.about, label: 'Scope of this record' },
+  { href: urls.steps, label: 'The method, as a manual' },
+  { href: urls.sources, label: 'Sources & databases' },
+  { href: urls.download, label: 'Download the data' },
+];
 ---
+<Base title="Nazi Looted Books at Penn Libraries" crumb="/" active={null}>
+  <p style="margin:22px 0 0;max-width:680px;font:400 27px/1.42 var(--serif);color:var(--ink);text-wrap:pretty">The Penn Libraries hold roughly two thousand one hundred books taken from people the Nazis persecuted and murdered. This site is a record of what we have identified — and, just as plainly, of what we still cannot account for.</p>
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+  <div style="margin-top:36px;display:grid;grid-template-columns:1fr 1px 1fr;gap:34px;max-width:600px">
+    <div>
+      <div style="font:400 50px/1 var(--serif);letter-spacing:-.01em">2,100+</div>
+      <div style="margin-top:8px;font:500 12px/1.4 var(--sans);color:var(--mut)">identified in the collection</div>
+    </div>
+    <div style="background:rgba(var(--inkrgb),.16)"></div>
+    <div>
+      <div style="font:400 50px/1 var(--serif);letter-spacing:-.01em;color:var(--fn3)">2,391–5,549</div>
+      <div style="margin-top:8px;font:500 12px/1.4 var(--sans);color:var(--mut)">believed sent here after the war</div>
+    </div>
+  </div>
+  <p style="margin:18px 0 0;max-width:600px;font:400 15px/1.5 var(--serif);font-style:italic;color:var(--mut)">We have not closed the distance between these two figures. Keeping it visible is the point — <a href={urls.gaps} style="font-style:italic;text-decoration:underline;text-underline-offset:2px">read what we cannot account for</a>.</p>
+
+  <div style="margin-top:44px;border-top:1px solid rgba(var(--inkrgb),.14)">
+    {links.map((l) => (
+      <a href={l.href} style="text-decoration:none;border-bottom:1px solid rgba(var(--inkrgb),.14);display:grid;grid-template-columns:36px 1fr auto;align-items:baseline;gap:20px;padding:22px 4px">
+        <span style="font:400 13px/1 'IBM Plex Mono',monospace;color:var(--fn2)">{l.n}</span>
+        <span>
+          <span style="display:block;font:500 18px/1.3 var(--sans);color:var(--ink)">{l.title}</span>
+          <span style="display:block;margin-top:5px;font:400 15px/1.45 var(--serif);color:var(--mut)">{l.body}</span>
+        </span>
+        <span style="font:400 22px/1 var(--serif);color:var(--ac)">→</span>
+      </a>
+    ))}
+  </div>
+
+  <div style="margin-top:34px;display:flex;flex-wrap:wrap;gap:22px;font:400 13px/1 var(--sans)">
+    {quick.map((q) => (<a href={q.href}>{q.label}</a>))}
+  </div>
+</Base>

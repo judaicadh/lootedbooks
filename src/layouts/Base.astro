@@ -1,0 +1,71 @@
+---
+import '../styles/global.css';
+import { urls } from '../data/looted';
+
+export interface Props {
+  title: string;
+  crumb: string;
+  active?: 'markings' | 'cases' | 'register' | 'sources' | 'about' | null;
+}
+
+const { title, crumb, active = null } = Astro.props;
+
+const nav = (isActive: boolean) =>
+  `appearance:none;background:none;border:none;padding:0 0 3px;cursor:pointer;font:${isActive ? 500 : 400} 12.5px/1 var(--sans);color:${isActive ? 'var(--ink)' : 'var(--mut)'};border-bottom:2px solid ${isActive ? 'var(--ac)' : 'transparent'}`;
+
+const items: { label: string; href: string; key: NonNullable<Props['active']> }[] = [
+  { label: 'Markings guide', href: urls.markings, key: 'markings' },
+  { label: 'Cases', href: urls.cases, key: 'cases' },
+  { label: 'Register', href: urls.register, key: 'register' },
+  { label: 'Sources', href: urls.sources, key: 'sources' },
+  { label: 'About', href: urls.about, key: 'about' },
+];
+---
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" />
+    <meta name="generator" content={Astro.generator} />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Serif:ital,wght@0,400;0,500;0,600;1,400&family=Oswald:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <title>{title}</title>
+  </head>
+  <body>
+    <div style="min-height:100vh;background:var(--pp)">
+      <header style="position:sticky;top:0;z-index:20;background:rgba(var(--pprgb),.94);backdrop-filter:blur(6px);border-bottom:1px solid rgba(var(--inkrgb),.14)">
+        <div style="max-width:1180px;margin:0 auto;padding:15px 40px;display:flex;justify-content:space-between;align-items:baseline;gap:24px">
+          <a href={urls.home} style="text-decoration:none;display:flex;flex-direction:column;align-items:flex-start;gap:3px">
+            <span style="font:600 18px/1 var(--display);letter-spacing:.055em;text-transform:uppercase;color:var(--ink)">Nazi Looted Books</span>
+            <span style="font:400 10px/1 'IBM Plex Mono',monospace;letter-spacing:.14em;text-transform:uppercase;color:var(--mut)">at Penn Libraries</span>
+          </a>
+          <nav style="display:flex;gap:22px">
+            {items.map((it) => (
+              <a href={it.href} style={nav(active === it.key)}>{it.label}</a>
+            ))}
+          </nav>
+        </div>
+      </header>
+
+      <div style="max-width:1180px;margin:0 auto;padding:8px 40px 0">
+        <div style="font:400 11px/1 'IBM Plex Mono',monospace;color:var(--fn)">{crumb}</div>
+      </div>
+
+      <main style="max-width:1180px;margin:0 auto;padding:26px 40px 90px">
+        <slot />
+      </main>
+
+      <footer style="border-top:1px solid rgba(var(--inkrgb),.14);background:var(--sf2)">
+        <div style="max-width:1180px;margin:0 auto;padding:22px 40px;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;font:400 11.5px/1.5 'IBM Plex Mono',monospace;color:var(--fn)">
+          <span>Penn Libraries · Provenance of looted books · prototype</span>
+          <span>Uncertainty in this record is shown, not hidden.</span>
+        </div>
+      </footer>
+    </div>
+  </body>
+</html>

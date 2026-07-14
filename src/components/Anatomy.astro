@@ -1,0 +1,153 @@
+---
+import { LOCS } from '../data/looted';
+
+export interface Props {
+  accent?: string;
+  ink?: string;
+  mut?: string;
+  leafBg?: string;
+  paperBg?: string;
+  spineBg?: string;
+  fontHead?: string;
+  fontBody?: string;
+  initial?: number;
+}
+
+const {
+  accent = '#35506e',
+  ink = '#201d17',
+  mut = '#6c6558',
+  leafBg = '#efece4',
+  paperBg = '#faf7f0',
+  spineBg = '#cdc6b6',
+  fontHead = "'IBM Plex Serif',serif",
+  fontBody = "'IBM Plex Sans',system-ui,sans-serif",
+  initial = 2,
+} = Astro.props;
+
+const PAL = { accent, ink, mut, leafBg, paperBg, spineBg, fontHead, fontBody };
+
+const leafStyle = (i: number, active: boolean) => {
+  const step = Math.abs(i - 5);
+  return `flex:none;width:26px;height:${152 - step * 4}px;padding:7px 0 0;cursor:pointer;`
+    + `border:1px solid ${active ? accent : 'rgba(32,29,23,.20)'};border-radius:2px;`
+    + `background:${active ? paperBg : leafBg};`
+    + `box-shadow:${active ? '0 8px 16px rgba(32,29,23,.16)' : '0 1px 2px rgba(32,29,23,.07)'};`
+    + `transform:translateY(${active ? '-14px' : '0'});`
+    + `transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease;`
+    + `display:flex;align-items:flex-start;justify-content:center`;
+};
+const numStyle = (active: boolean) => `font:500 9.5px/1 'IBM Plex Mono',monospace;color:${active ? accent : mut}`;
+const tagStyle = (active: boolean) => `appearance:none;background:none;border:none;padding:2px 0;cursor:pointer;text-align:left;`
+  + `font:${active ? 500 : 400} 11px/1.5 'IBM Plex Mono',monospace;`
+  + `color:${active ? accent : mut};text-decoration:${active ? 'underline' : 'none'};text-underline-offset:3px`;
+
+const sel = LOCS[initial];
+---
+<div data-anatomy style={`display:grid;grid-template-columns:1fr 340px;gap:36px;align-items:start;font-family:'IBM Plex Sans',system-ui,sans-serif;color:${ink}`}>
+  <div style="min-width:0">
+    <div style={`font:500 10.5px/1 'IBM Plex Mono',monospace;letter-spacing:.14em;text-transform:uppercase;color:${mut}`}>The book as a sequence of surfaces</div>
+    <p style={`margin:9px 0 0;max-width:420px;font:400 14px/1.5 ${fontBody};color:${ink}`}>Reference plates show you an idealised stamp. They never show you where it hides. Select a surface — the evidence is rarely on the page you would open to first.</p>
+
+    <div style="margin-top:30px;display:flex;align-items:flex-end;gap:0;padding:22px 6px 30px;overflow-x:auto">
+      <div style={`flex:none;width:12px;height:158px;border-radius:3px 0 0 3px;background:${spineBg};margin-right:2px;box-shadow:inset -2px 0 3px rgba(0,0,0,.14)`}></div>
+      {LOCS.map((loc, i) => (
+        <button type="button" data-leaf={i} onclick={`window.__anatomySelect && window.__anatomySelect(${i})`} style={leafStyle(i, i === initial)}>
+          <span data-num style={numStyle(i === initial)}>{loc.n}</span>
+        </button>
+      ))}
+    </div>
+
+    <div style="display:flex;flex-wrap:wrap;gap:4px 18px;margin-top:4px">
+      {LOCS.map((loc, i) => (
+        <button type="button" data-tag={i} onclick={`window.__anatomySelect && window.__anatomySelect(${i})`} style={tagStyle(i === initial)}>{loc.n} · {loc.name}</button>
+      ))}
+    </div>
+  </div>
+
+  <aside data-panel style="align-self:stretch">
+    <div style={`font:500 10.5px/1 'IBM Plex Mono',monospace;letter-spacing:.14em;text-transform:uppercase;color:${accent}`}>Where to look</div>
+    <h3 data-name style={`margin:8px 0 2px;font:400 24px/1.15 ${fontHead};letter-spacing:-.01em`}>{sel.name}</h3>
+    <div data-where style={`font:400 13px/1.4 ${fontBody};color:${mut}`}>{sel.where}</div>
+
+    <div style={`margin-top:14px;height:132px;border:1px solid rgba(32,29,23,.16);border-radius:2px;background-image:repeating-linear-gradient(-45deg,${leafBg},${leafBg} 7px,${paperBg} 7px,${paperBg} 14px);display:flex;align-items:center;justify-content:center;padding:10px;text-align:center`}>
+      <span data-photo style={`font:400 10.5px/1.5 'IBM Plex Mono',monospace;color:${mut}`}>in-situ photograph<br>{sel.name}</span>
+    </div>
+
+    <div style={`margin-top:14px;font:500 11.5px/1 'IBM Plex Mono',monospace;color:${ink}`}>Recorded here in <span data-count style={`color:${accent}`}>{sel.count}</span> books</div>
+
+    <div data-marks style="margin-top:12px;display:flex;flex-direction:column;gap:10px">
+      {sel.marks.map((m) => (
+        <div style="padding-left:12px;border-left:2px solid rgba(32,29,23,.16)">
+          <div style={`font:500 13.5px/1.3 ${fontBody};color:${ink}`}>{m.name}</div>
+          <div style={`font:400 12.5px/1.4 ${fontBody};color:${mut}`}>{m.note}</div>
+        </div>
+      ))}
+    </div>
+
+    {sel.hint && (
+      <div data-hint style={`margin-top:14px;padding:11px 12px;background:${leafBg};border-radius:2px;font:400 13px/1.45 ${fontHead};color:${ink}`}>{sel.hint}</div>
+    )}
+  </aside>
+</div>
+
+<script is:inline define:vars={{ LOCS, PAL }}>
+  (function () {
+    const root = document.querySelector('[data-anatomy]');
+    if (!root) return;
+    const { accent, ink, mut, leafBg, paperBg, fontBody, fontHead } = PAL;
+    const leafStyle = (i, active) => {
+      const step = Math.abs(i - 5);
+      return `flex:none;width:26px;height:${152 - step * 4}px;padding:7px 0 0;cursor:pointer;`
+        + `border:1px solid ${active ? accent : 'rgba(32,29,23,.20)'};border-radius:2px;`
+        + `background:${active ? paperBg : leafBg};`
+        + `box-shadow:${active ? '0 8px 16px rgba(32,29,23,.16)' : '0 1px 2px rgba(32,29,23,.07)'};`
+        + `transform:translateY(${active ? '-14px' : '0'});`
+        + `transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease;`
+        + `display:flex;align-items:flex-start;justify-content:center`;
+    };
+    const numStyle = (active) => `font:500 9.5px/1 'IBM Plex Mono',monospace;color:${active ? accent : mut}`;
+    const tagStyle = (active) => `appearance:none;background:none;border:none;padding:2px 0;cursor:pointer;text-align:left;`
+      + `font:${active ? 500 : 400} 11px/1.5 'IBM Plex Mono',monospace;`
+      + `color:${active ? accent : mut};text-decoration:${active ? 'underline' : 'none'};text-underline-offset:3px`;
+
+    const leaves = root.querySelectorAll('[data-leaf]');
+    const tags = root.querySelectorAll('[data-tag]');
+    const panel = root.querySelector('[data-panel]');
+
+    window.__anatomySelect = function (idx) {
+      const loc = LOCS[idx];
+      leaves.forEach((b, i) => {
+        b.setAttribute('style', leafStyle(i, i === idx));
+        const num = b.querySelector('[data-num]');
+        if (num) num.setAttribute('style', numStyle(i === idx));
+      });
+      tags.forEach((t, i) => t.setAttribute('style', tagStyle(i === idx)));
+
+      panel.querySelector('[data-name]').textContent = loc.name;
+      panel.querySelector('[data-where]').textContent = loc.where;
+      panel.querySelector('[data-photo]').innerHTML = 'in-situ photograph<br>' + loc.name;
+      panel.querySelector('[data-count]').textContent = loc.count;
+
+      const marks = panel.querySelector('[data-marks]');
+      marks.innerHTML = loc.marks.map((m) =>
+        `<div style="padding-left:12px;border-left:2px solid rgba(32,29,23,.16)">`
+        + `<div style="font:500 13.5px/1.3 ${fontBody};color:${ink}">${m.name}</div>`
+        + `<div style="font:400 12.5px/1.4 ${fontBody};color:${mut}">${m.note}</div></div>`
+      ).join('');
+
+      let hint = panel.querySelector('[data-hint]');
+      if (loc.hint) {
+        if (!hint) {
+          hint = document.createElement('div');
+          hint.setAttribute('data-hint', '');
+          panel.appendChild(hint);
+        }
+        hint.setAttribute('style', `margin-top:14px;padding:11px 12px;background:${leafBg};border-radius:2px;font:400 13px/1.45 ${fontHead};color:${ink}`);
+        hint.textContent = loc.hint;
+      } else if (hint) {
+        hint.remove();
+      }
+    };
+  })();
+</script>

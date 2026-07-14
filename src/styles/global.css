@@ -1,1 +1,33 @@
-@import "tailwindcss";
+/* Penn "Nazi Looted Books" — ledger theme.
+   The design prototype offered three tempers (ledger / evidence / finding-aid);
+   the ledger direction is the shipped one. Swapping these variables re-skins the
+   whole site. */
+:root {
+  --pp: #f4f1ea;
+  --sf: #faf7f0;
+  --sf2: #efece3;
+  --sf3: #f2efe7;
+  --ink: #201d17;
+  --ink2: #4a4636;
+  --mut: #6c6558;
+  --fn: #9a9384;
+  --fn2: #b3ab9a;
+  --fn3: #8a8272;
+  --ac: #35506e;
+  --ac2: #25405c;
+  --inkrgb: 32, 29, 23;
+  --acrgb: 53, 80, 110;
+  --pprgb: 244, 241, 234;
+  --serif: 'IBM Plex Serif', Georgia, serif;
+  --sans: 'IBM Plex Sans', system-ui, sans-serif;
+  --display: 'Oswald', sans-serif;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; background: var(--pp); color: var(--ink); font-family: var(--sans); }
+a { color: var(--ac); text-decoration: none; }
+a:hover { color: var(--ac2); text-decoration: underline; text-underline-offset: 2px; }
+button { font-family: inherit; }
+::selection { background: rgba(var(--acrgb), .18); }
+::-webkit-scrollbar { width: 11px; height: 11px; }
+::-webkit-scrollbar-thumb { background: rgba(var(--inkrgb), .22); border-radius: 6px; }

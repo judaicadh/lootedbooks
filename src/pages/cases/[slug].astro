@@ -1,3 +1,29 @@
 ---
+import Base from '../../layouts/Base.astro';
+import { urls, CASES } from '../../data/looted';
 
+export function getStaticPaths() {
+  return CASES.map((c) => ({ params: { slug: c.slug }, props: { kase: c } }));
+}
+
+const { kase } = Astro.props;
+const recordHref = kase.recordId ? urls.record(kase.recordId) : urls.gaps;
 ---
+<Base title={`${kase.title} — Nazi Looted Books`} crumb={`/cases/${kase.slug}/`} active="cases">
+  <div style="max-width:680px">
+    <a href={urls.cases} style="font:400 12.5px/1 var(--sans);color:var(--ac)">← All cases</a>
+    <h1 style="margin:16px 0 0;font:400 32px/1.2 var(--serif);letter-spacing:-.01em">{kase.title}</h1>
+    <p style="margin:16px 0 0;font:400 18px/1.6 var(--serif);color:var(--ink)">{kase.lede}</p>
+
+    <div style="margin-top:24px;display:flex;flex-direction:column;gap:20px">
+      {kase.sections.map((s) => (
+        <p style="margin:0;font:400 16px/1.7 var(--serif);color:var(--ink);text-wrap:pretty">{s}</p>
+      ))}
+    </div>
+
+    <div style="margin-top:26px;padding:16px 18px;background:var(--sf);border:1px solid rgba(var(--inkrgb),.14);border-radius:4px">
+      <div style="font:500 10.5px/1 'IBM Plex Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--fn)">In the register</div>
+      <a href={recordHref} style="display:inline-block;margin-top:8px;font:400 15px/1.4 var(--serif);color:var(--ac)">{kase.recordLabel} →</a>
+    </div>
+  </div>
+</Base>

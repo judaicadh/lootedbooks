@@ -1,3 +1,28 @@
 ---
+import Base from '../../layouts/Base.astro';
+import { urls, MARKINGS } from '../../data/looted';
 
+const thumb = (hue: number) =>
+  `height:118px;border-bottom:1px solid rgba(var(--inkrgb),.12);background-image:repeating-linear-gradient(-45deg, oklch(0.84 0.03 ${hue}), oklch(0.84 0.03 ${hue}) 8px, oklch(0.89 0.02 ${hue}) 8px, oklch(0.89 0.02 ${hue}) 16px)`;
 ---
+<Base title="The markings — Nazi Looted Books" crumb="/markings/" active="markings">
+  <h1 style="margin:14px 0 0;font:400 33px/1.05 var(--display);text-transform:uppercase;letter-spacing:.02em">The markings</h1>
+  <p style="margin:16px 0 0;max-width:640px;font:400 16.5px/1.55 var(--serif);color:var(--mut)">Every kind of mark found in these books, and how often it appears across the Penn holdings. For where in the book each one turns up — including the places nobody looks — see <a href={urls.anatomy}>where to look</a>.</p>
+
+  <div style="margin-top:30px;display:grid;grid-template-columns:repeat(3,1fr);gap:22px">
+    {MARKINGS.map((m) => (
+      <a href={urls.marking(m.slug)} style="text-decoration:none;background:var(--sf);border:1px solid rgba(var(--inkrgb),.14);border-radius:4px;overflow:hidden;display:flex;flex-direction:column">
+        <div style={thumb(m.hue)}></div>
+        <div style="padding:15px 16px 17px">
+          <div style="font:500 16px/1.25 var(--sans);color:var(--ink)">{m.name}</div>
+          <div style="margin-top:4px;font:400 12.5px/1.4 var(--sans);color:var(--fn)">{m.body}</div>
+          <div style="margin-top:11px;font:400 13px/1.45 var(--serif);color:var(--mut)">{m.where}</div>
+          <div style="margin-top:12px;display:flex;justify-content:space-between;align-items:baseline">
+            <span style="font:500 12px/1 'IBM Plex Mono',monospace;color:var(--ink)">{m.count} <span style="color:var(--fn)">books</span></span>
+            <span style="font:400 15px/1 var(--serif);color:var(--ac)">→</span>
+          </div>
+        </div>
+      </a>
+    ))}
+  </div>
+</Base>

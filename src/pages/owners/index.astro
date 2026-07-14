@@ -1,3 +1,24 @@
 ---
+import Base from '../../layouts/Base.astro';
+import { urls, OWNERS } from '../../data/looted';
 
+const owners = Object.values(OWNERS);
 ---
+<Base title="Identified owners — Nazi Looted Books" crumb="/owners/" active="register">
+  <div style="max-width:760px">
+    <h1 style="margin:14px 0 0;font:400 33px/1.05 var(--display);text-transform:uppercase;letter-spacing:.02em">Identified owners</h1>
+    <p style="margin:16px 0 0;font:400 16.5px/1.55 var(--serif);color:var(--mut)">The people and institutions whose books, taken from them, have been traced back to their names. Most volumes in the <a href={urls.register}>register</a> carry an owner mark that has not yet been resolved to a person; these have.</p>
+
+    <div style="margin-top:28px;border-top:1px solid rgba(var(--inkrgb),.14)">
+      {owners.map((o) => (
+        <a href={urls.owner(o.slug)} style="text-decoration:none;border-bottom:1px solid rgba(var(--inkrgb),.14);display:grid;grid-template-columns:1fr auto;gap:20px;align-items:baseline;padding:20px 4px">
+          <span>
+            <span style="display:block;font:500 18px/1.3 var(--serif);color:var(--ink)">{o.name}</span>
+            <span style="display:block;margin-top:5px;font:400 14.5px/1.5 var(--serif);color:var(--mut)">{o.dbNote}</span>
+          </span>
+          <span style="font:400 20px/1 var(--serif);color:var(--ac)">→</span>
+        </a>
+      ))}
+    </div>
+  </div>
+</Base>

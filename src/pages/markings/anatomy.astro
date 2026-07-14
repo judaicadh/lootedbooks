@@ -1,3 +1,15 @@
 ---
-
+import Base from '../../layouts/Base.astro';
+import Anatomy from '../../components/Anatomy.astro';
 ---
+<Base title="Where to look — Nazi Looted Books" crumb="/markings/anatomy/" active="markings">
+  <h1 style="margin:14px 0 0;font:400 33px/1.05 var(--display);text-transform:uppercase;letter-spacing:.02em">Where to look</h1>
+  <p style="margin:16px 0 22px;max-width:640px;font:400 16.5px/1.55 var(--serif);color:var(--mut)">Reference volumes show you an idealised stamp. They never show you where it hides. Select a surface of the book.</p>
+
+  <Anatomy />
+
+  <div style="margin-top:28px;max-width:640px;padding:16px 18px;background:var(--sf);border:1px solid rgba(var(--inkrgb),.14);border-radius:4px">
+    <div style="font:500 10.5px/1 'IBM Plex Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--fn)">On a phone</div>
+    <p style="margin:8px 0 0;font:400 14px/1.55 var(--serif);color:var(--mut)">The fanned diagram needs width. On narrow screens it collapses to a vertical list of surfaces — tap one to expand its markings inline — keeping the same order, so the “front board → spine” sequence still reads as the physical book.</p>
+  </div>
+</Base>

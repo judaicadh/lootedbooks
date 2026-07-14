@@ -1,3 +1,23 @@
 ---
-
+import Base from '../../layouts/Base.astro';
+import { urls, STEPS } from '../../data/looted';
 ---
+<Base title="How to find a looted book — Nazi Looted Books" crumb="/about/method/steps/" active="about">
+  <div style="max-width:720px">
+    <div style="font:400 11px/1 'IBM Plex Mono',monospace;color:var(--fn)">extracted from the method essay, as a working manual</div>
+    <h1 style="margin:10px 0 0;font:400 33px/1.05 var(--display);text-transform:uppercase;letter-spacing:.02em">How to find a looted book</h1>
+    <p style="margin:18px 0 0;font:400 17px/1.6 var(--serif);color:var(--ink)">Five steps, drawn from fifteen years of doing it. The full account, with the false starts, is in <a href={urls.cases}>the cases</a>.</p>
+
+    <ol style="margin:30px 0 0;padding:0;list-style:none">
+      {STEPS.map((st) => (
+        <li style="display:grid;grid-template-columns:44px 1fr;gap:20px;padding:20px 0;border-top:1px solid rgba(var(--inkrgb),.14)">
+          <div style="font:400 26px/1 var(--serif);color:var(--fn2)">{st.n}</div>
+          <div>
+            <div style="font:500 17px/1.3 var(--sans);color:var(--ink)">{st.title}</div>
+            <p style="margin:7px 0 0;font:400 15px/1.55 var(--serif);color:var(--mut)">{st.body}</p>
+          </div>
+        </li>
+      ))}
+    </ol>
+  </div>
+</Base>
