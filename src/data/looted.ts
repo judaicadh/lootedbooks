@@ -179,7 +179,15 @@ export const TIERS: Record<TierKey, { label: string; order: number }> = {
   context: { label: 'Inferred — context', order: 2 },
   possible: { label: 'Possible', order: 3 },
 };
-export const SERIES: Record<string, string> = { dropsie: 'Dropsie / JCR', kaplan: 'Kaplan — Cape Town', other: 'Other acquisitions' };
+// The six sheets of the source spreadsheet, in evidence order.
+export const SERIES: Record<string, string> = {
+  western: 'Western European collection',
+  lithuanian: 'Lithuanian / Baltic',
+  inferred: 'Inferred provenance',
+  'loc-exchange': 'Library of Congress exchange',
+  'card-catalog': 'Card-catalog only',
+  manuscripts: 'Rare manuscripts',
+};
 
 export function chip(tier: string): string {
   const base = "font:500 10px/1 'IBM Plex Mono',monospace;letter-spacing:.04em;text-transform:uppercase;padding:5px 9px;border-radius:3px;white-space:nowrap;";
