@@ -105,17 +105,17 @@ export const MARKINGS: Mark[] = [
     desc: 'The mark of the Nazi task force that systematically looted Jewish libraries. Over a dozen sub-variants exist; the eagle-and-code forms are the most recognisable.',
     obscured: 'ink-cancelled after the war', note: 'One of more than a dozen distinct Nazi confiscation stamps recorded in these books.',
     bodyFull: 'Einsatzstab Reichsleiter Rosenberg (ERR)', bencowitz: 'Bencowitz (1946), plate group III' },
-  { slug: 'pohl', name: 'Johannes Pohl pastedown', body: 'ERR (Pohl)', where: 'Front pastedown', count: 18, hue: 20,
-    desc: 'A handwritten note in Hebrew transliteration, in the hand of Johannes Pohl, the ERR’s “expert” on Jewish books. A rare and specific marking.',
-    obscured: 'faded pencil', note: 'Where present, it ties the book directly to the ERR’s Frankfurt operation.',
-    bodyFull: 'Johannes Pohl, for the ERR', bencowitz: '—' },
+  { slug: 'pohl', name: 'Johannes Pohl pastedown', body: 'ERR (Pohl)', where: 'Inside the upper board', count: 18, hue: 20,
+    desc: 'A pastedown, usually inside the upper board, carrying a handwritten transliteration of the title, author and publication details in the hand of Johannes Pohl — special assistant to Alfred Rosenberg at the ERR. Often only a torn fragment of it survives.',
+    obscured: 'torn out, or a surviving fragment', note: 'Pohl, a Catholic priest turned NSDAP Hebraist, ran the January 1942 looting of the Vilnius libraries: he shipped the most valuable books to the planned Nazi museum in Frankfurt and sold the rest to a paper mill.',
+    bodyFull: 'Johannes Pohl, for the Einsatzstab Reichsleiter Rosenberg', bencowitz: '—' },
   { slug: 'disinf', name: 'Disinfection stamp', body: 'Offenbach intake', where: 'Flyleaf and title-page verso', count: 143, hue: 200,
     desc: '“desinf. Lk. Sept 45” and similar — applied when books were fumigated on intake at the depot. A small, bureaucratic mark that reliably dates the book’s passage through Offenbach.',
     obscured: 'overstamped', note: 'Not a provenance mark in itself, but a firm tie to the Offenbach timeline.',
     bodyFull: 'Offenbach Archival Depot, intake', bencowitz: '—' },
-  { slug: 'ajdc', name: 'AJDC Library stamp', body: 'the “Joint”', where: 'Inside back board (lower)', count: 208, hue: 210,
-    desc: 'The stamp of the American Jewish Joint Distribution Committee libraries — books lent to Displaced Persons camps before being returned and redistributed.',
-    obscured: 'on the lower board', note: 'Almost always on the inside of the lower board, a surface a hurried survey skips.',
+  { slug: 'ajdc', name: 'AJDC Library stamp', body: 'the “Joint”', where: 'Inside back board (lower) / rear cover', count: 208, hue: 210,
+    desc: 'The stamp “A.J.D.C. LIBRARY — NOT TO BE REMOVED FROM THE PREMISES,” applied to some of the roughly twenty thousand books the American Jewish Joint Distribution Committee borrowed from Offenbach for use in the Displaced Persons camps of the American Zone.',
+    obscured: 'on the lower board', note: 'With OAD, JCR or Nazi evidence it confirms looting; on its own it is ambiguous, since some DP-camp books were donated by other Jewish organisations rather than routed through Offenbach.',
     bodyFull: 'American Jewish Joint Distribution Committee', bencowitz: '—' },
   { slug: 'owner', name: 'Pre-war owner stamps', body: 'personal & institutional', where: 'Throughout — title page, boards, flyleaf', count: 690, hue: 40,
     desc: 'The stamps and bookplates of the people and institutions who owned these books before they were taken — synagogues, schools, community libraries, and private collectors.',
@@ -124,33 +124,33 @@ export const MARKINGS: Mark[] = [
 ];
 
 export const STEPS: Step[] = [
-  { n: '1', title: 'Read the shelf, not the catalog', body: 'The catalog records what a cataloguer saw decades ago. The looting evidence is physical. Identification began by pulling volumes and looking, class by class — not by querying a database.' },
-  { n: '2', title: 'Turn the title page over', body: 'A large share of Offenbach stamps are on the verso, not the recto. The single most productive habit is to look at the back of the page you would normally stop at.' },
-  { n: '3', title: 'Look under later bookplates and pockets', body: 'A JCR or Annenberg plate, or a library card pocket added in the 1960s, frequently sits directly over the earliest mark. The oldest evidence is usually the layer nobody removed.' },
-  { n: '4', title: 'Match the name against the databases', body: 'An owner stamp is a lead, not a conclusion. The name is checked against Yad Vashem, USHMM and JDC records — to confirm the person, and, too often, to confirm their fate.' },
-  { n: '5', title: 'Record the uncertainty, not just the finding', body: 'A book with no surviving mark but a pencilled catalog note is still recorded — at a lower confidence, with the reason stated. A register that only shows its certainties is not honest about how it was built.' },
+  { n: '1', title: 'Read the Dropsie card catalog, card by card', body: 'In the Freidus Classification Shelf List, the card is often the only written record of a book’s source — including the note “Gift of Jewish Cultural Reconstruction.” Yet it records no more than about nine hundred JCR books, and nearly half of those are neither in the catalog nor on the shelf. For several dozen that remain, the card is the only JCR evidence there is — and some of those were printed after the war, trace to known individuals, or carry American ownership marks, each of which casts doubt on the note.' },
+  { n: '2', title: 'Check the rare-manuscripts accession list', body: 'A battered handwritten accession list is the sole evidence that Dropsie received six rare manuscripts. Nothing on the manuscripts themselves marks them as looted; without the list they would be invisible.' },
+  { n: '3', title: 'Hunt the incunables named in the JCR report', body: 'A JCR report stated that Dropsie received three incunables. With no titles given and no mark to match, every Dropsie incunable had to be pulled and inspected by hand to find the three.' },
+  { n: '4', title: 'Reconnect empty bindings with their textblocks', body: 'Rebinding discarded the old covers, and with them JCR bookplates and sometimes OAD or Nazi stamps. A marked empty binding can prove that a rebound, unmarked textblock belongs in the record — as with the Nedarim binding whose owner’s autograph matched a volume in the Rare Book Room that had been left out.' },
+  { n: '5', title: 'Shelf-read the entire collection', body: 'The most tedious step, and not a clean one. Books whose spine date is post-war but whose title page predates 1941 still carried OAD/JCR evidence, which forced the shelf read to widen and include spine dates through 1948.' },
 ];
 
 export const CASES: Case[] = [
-  { slug: 'nedarim-binding', title: 'The empty Nedarim binding', blurb: 'A spine stamped at Offenbach whose textblock had been shelved three floors away, under a different call number.',
-    lede: 'For years the binding and its pages were catalogued as two unrelated items. The stamp on the spine is what reunited them.',
-    sections: ['Shelf-reading the Talmud class turned up a detached binding — boards and spine, no pages — with an OAD stamp on the spine itself, the only surface left to mark. Empty bindings are usually discarded or ignored. This one was kept because the stamp made it evidence.', 'The matching textblock was found later in a different sequence, its own title-page verso carrying the same depot batch colour. The two were catalogued as one volume again, seventy years after they came apart.', 'It is the case that taught the project to treat spines, and empty bindings, as places to look.'],
+  { slug: 'nedarim-binding', title: 'The empty Nedarim binding', blurb: 'A 43-cm binding stamped and bookplated at Offenbach, whose rebound textblock sat unmarked in the Rare Book Room — and had been left out of the database.',
+    lede: 'The binding carried the evidence; the pages did not. An owner’s autograph, on the last leaf of each, is what proved they were one book.',
+    sections: ['An empty binding turned up in the shelf read: boards and spine, 43 cm, a JCR bookplate, “desinf. Lk. Sept 1945” on the spine, “RBR 1739” inside the upper board, and an owner’s autograph on the inside of the lower board. Empty bindings are usually discarded. This one was kept because its marks made it evidence.', 'A hard-copy printout of the old Aleph titles gave RBR #1739 as a large-folio מסכת נדרים, Slabodka 1804 — an edition unrecorded in Vinograd, Steinschneider or Van Straalen. In the Rare Book Room stood a volume of the same size, Nedarim Nazir (Slavita, 1804), “Hb 9” penciled on the title page. Rebound, with no JCR bookplate and no OAD or Nazi stamp, it had originally been excluded.', 'Only after the empty binding was found, and the volume re-examined, did the same owner’s autograph — on the verso of the last page — reunite them. It is the case that taught the project to treat spines and empty bindings as places to look.'],
     recordId: '04821', recordLabel: 'Sefer Nedarim (no. 04821)' },
-  { slug: 'loc-29', title: 'The Library of Congress twenty-nine', blurb: 'Twenty-nine volumes traced by cross-reading Offenbach’s monthly shipping reports against Penn accessions.',
-    lede: 'The depot’s own paperwork, read against Penn’s accession dates, placed twenty-nine books that carried no usable stamp.',
-    sections: ['Offenbach filed monthly reports listing outbound shipments. Read against Penn’s 1949–50 accessions, the dates and counts lined up for a cluster of twenty-nine volumes.', 'None of the twenty-nine could be confirmed by a marking alone. They sit in the register at a lower confidence tier, inferred from context, with the reports linked as corroboration.'],
-    recordId: '11207', recordLabel: 'a context-tier record (no. 11207)' },
-  { slug: '1952-tell', title: 'The 1952 tell', blurb: 'An accession date that gave away a JCR route where the bookplate had been removed.',
-    lede: 'Someone had lifted the JCR bookplate. The accession date it left behind was enough to reconstruct the route.',
-    sections: ['A volume arrived with a clean pastedown — but a ghost of adhesive and a 1952 accession stamp. JCR distributed through 1952; Penn acquired almost nothing else by that route in that year.', 'It is a thin case, and recorded as one. The point is that even a removed marking leaves a shape.'],
-    recordId: '05930', recordLabel: 'a thinly-evidenced record (no. 05930)' },
-  { slug: 'broken-set', title: 'The broken set', blurb: 'A multivolume work split across three confidence tiers, because the evidence survived unevenly.',
-    lede: 'One work, five volumes, three different levels of certainty. The register does not average them.',
-    sections: ['Volumes I and III carry OAD stamps. Volume II has only an owner inscription. Volumes IV and V have nothing but their place in the set.', 'Rather than record the set at its strongest or weakest, each volume keeps its own tier. A reader can see exactly which parts of the case are solid.'],
-    recordId: '04821', recordLabel: 'the set’s lead volume (no. 04821)' },
-  { slug: '5549-2391', title: '5,549 against 2,391', blurb: 'Why two surviving tallies of what was sent to Penn disagree by three thousand books.',
-    lede: 'The homepage’s two numbers are not a rounding problem. They are two different documents that never reconciled.',
-    sections: ['One figure comes from a depot shipping manifest, one from a JCR distribution summary. They count different things at different moments, and neither is complete.', 'We publish both, and hold the difference open on the Gaps page. Choosing one number would be tidier and less true.'],
+  { slug: 'loc-29', title: 'The Library of Congress twenty-nine', blurb: 'Twenty-nine Yiddish and Hebrew titles from seven eastern-European cities, tied to JCR not by any stamp in the book but by the Library of Congress’s own records.',
+    lede: 'None of the twenty-nine carries direct OAD, JCR or Nazi evidence. The Library of Congress catalog is the only thing that places them.',
+    sections: ['The group is unmistakable as a batch: all printed between 1912 and 1941, all from Moscow, Minsk, Kiev, Kharkov, Vilna, Kaunas or Warsaw, all bearing the same Library of Congress stamp and receipt date. Seventeen are marked “exchange — Library of Congress” on dates between 1953 and 1959; two carry a LoC Surplus Duplicate stamp on the front cover.', 'Searching the LoC online catalog, eleven of the titles carry a local note that copy 1 “was presented to the Library of Congress by Jewish Cultural Reconstruction, Inc.” and added on Sept 5, 1950, under the Holocaust-Era Judaic Heritage Library. One bears the stamp “Sichergestellt durch Einsatzstab RR Reval” — the Nazi confiscation mark that anchors the provenance of the whole group.', 'The likeliest history: JCR sent multiple copies of each title to the Library of Congress, copy 1 stayed, and over nine years of exchanges Dropsie received the duplicates. Like the card-catalog books, these were looted and are part of the collection — but the LoC record is their only evidence, so they are not counted among the titles JCR sent directly to Dropsie.'],
+    recordId: null, recordLabel: 'these sit outside the JCR-to-Dropsie count' },
+  { slug: 'incunables', title: 'The three incunables', blurb: 'A single line in a JCR report — that Dropsie received three incunables — sent the search through every incunable on the shelf.',
+    lede: 'The report gave a number and nothing else: no titles, no marks to match. Three books had to be found among all the rest, by hand.',
+    sections: ['JCR’s own paperwork recorded that Dropsie had received three incunables. None was identified there by title, and an incunable need carry no OAD or JCR mark at all.', 'The only way through was physical: pull every incunable in the Dropsie collection and examine it for any trace of the JCR route. It is the kind of step a database query cannot replace — where the evidence exists, it is in the object.'],
+    recordId: null, recordLabel: 'see the method' },
+  { slug: 'broken-set', title: 'The broken set', blurb: 'A six-part work where only part one is marked, and a 208-issue newspaper run where only ten issues are stamped — both, on balance, entirely looted.',
+    lede: 'When part of a set carries OAD/JCR evidence and the rest does not, the honest reading is usually that all of it came the same way.',
+    sections: ['Of a six-part set, part one — and a second copy of part one — carries OAD/JCR evidence; parts two and three do not, and parts four through six are absent. It is far easier to believe the whole set came from JCR, and only the two copies of part one were marked, than that two copies of part one were added to a pre-existing broken set.', 'The same logic holds for a full four-year run of a Russian-language newspaper — 208 issues in individual folders, of which only ten bear an OAD stamp. Imagining that Dropsie held 198 issues and JCR happened to supply exactly the ten missing ones is the harder story to tell.'],
+    recordId: null, recordLabel: 'a reasoning, not a single record' },
+  { slug: '5549-2391', title: '2,100 against 2,391–5,549', blurb: 'Why the number found sits so far below the only figure ever stated for how many books were sent.',
+    lede: 'The range on the homepage is a single stated estimate that was never confirmed — not a count we have reconciled.',
+    sections: ['The identification has reached more than 2,100 titles. The figure of 2,391–5,549 is the estimated total sent to Dropsie — stated, but never confirmed, and spanning a range of more than three thousand volumes on its own.', 'We publish the found number against the estimate rather than choosing one, and hold the distance open on the Gaps page. The shelf read is not finished; the gap is part of the record, not a footnote to it.'],
     recordId: null, recordLabel: 'see the Gaps page' },
 ];
 
@@ -167,6 +167,7 @@ export const SOURCE_CATS = ['all', 'victims', 'shipping', 'bibliographic', 'refe
 export const OWNERS: Record<string, Owner> = {
   'rabbiner-seminar': { slug: 'rabbiner-seminar', name: 'Rabbiner-Seminar zu Frankfurt a. M.', bio: 'The Orthodox rabbinical seminary founded in Frankfurt in 1873. Its library, one of the finest of its kind, was seized by the ERR after the seminary was forced to close in 1938.', dbNote: 'Institutional record, Yad Vashem — collections seized 1938–41', bookIds: ['04821'] },
   'mendel-cohn': { slug: 'mendel-cohn', name: 'Mendel Cohn', bio: 'A private collector in Vienna. His name appears, stamped, on the title page of at least one volume now at Penn. He was deported in 1942; the database record confirms the date and does not record a return.', dbNote: 'Central Database of Shoah Victims’ Names — deported 1942', bookIds: ['07733'] },
+  'mordecai-kremer': { slug: 'mordecai-kremer', name: 'Rabbi Mordecai Kremer (Kaunas)', bio: 'A rabbi of Kaunas (Kovno), Lithuania, whose personal library the Nazis seized. Penn holds roughly 118 of the 162 known books from it — one of five cases where more than seventy percent of an identified personal library survived, together, in this collection. His stamped volumes are marked out on the Lithuanian sheet of the register.', dbNote: 'Kremer ownership stamps, cross-referenced against the Offenbach monthly processing lists', bookIds: [] },
 };
 
 export const TIERS: Record<TierKey, { label: string; order: number }> = {
@@ -268,9 +269,8 @@ export const RECORDS: BookRecord[] = buildRecords();
 export const COUNTRIES: string[] = [...new Set(RECORDS.map((r) => r.country))].filter((c) => c !== 'Unknown');
 
 export const EDITIONS = [
-  { ver: 'v2026.2', date: '2026-06', note: 'Added 41 context-tier records from the LoC cross-read.' },
-  { ver: 'v2026.1', date: '2026-02', note: 'First public edition. 2,573 records.' },
-  { ver: 'v2025.3', date: '2025-11', note: 'Internal — Kaplan/Cape Town series merged in.' },
+  { ver: 'working', date: 'in progress', note: 'Shelf read of the Katz Center collection under way; more than 2,100 titles identified so far.' },
+  { ver: 'planned', date: 'on completion', note: 'First public edition and a citable DOI will follow completion of the shelf read.' },
 ];
 
 // ---- anatomy ("where to look") ----

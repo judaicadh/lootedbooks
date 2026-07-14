@@ -28,14 +28,18 @@ const books = owner.bookIds.map((id) => {
         </div>
 
         <div style="margin-top:26px;font:500 11px/1 'IBM Plex Mono',monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--mut)">Their books at Penn</div>
-        <div style="margin-top:12px;border-top:1px solid rgba(var(--inkrgb),.14)">
-          {books.map((b) => (
-            <a href={urls.record(b.id)} style="text-decoration:none;border-bottom:1px solid rgba(var(--inkrgb),.12);padding:13px 4px;display:flex;justify-content:space-between;gap:16px;align-items:baseline">
-              <span style="font:400 15px/1.35 var(--serif);color:var(--ink)">{b.title}</span>
-              <span style="font:400 16px/1 var(--serif);color:var(--ac)">→</span>
-            </a>
-          ))}
-        </div>
+        {books.length > 0 ? (
+          <div style="margin-top:12px;border-top:1px solid rgba(var(--inkrgb),.14)">
+            {books.map((b) => (
+              <a href={urls.record(b.id)} style="text-decoration:none;border-bottom:1px solid rgba(var(--inkrgb),.12);padding:13px 4px;display:flex;justify-content:space-between;gap:16px;align-items:baseline">
+                <span style="font:400 15px/1.35 var(--serif);color:var(--ink)">{b.title}</span>
+                <span style="font:400 16px/1 var(--serif);color:var(--ac)">→</span>
+              </a>
+            ))}
+          </div>
+        ) : (
+          <p style="margin:12px 0 0;font:400 14.5px/1.6 var(--serif);font-style:italic;color:var(--mut)">Their individual volumes are still being linked into the register; the grouping is recorded on the Lithuanian sheet.</p>
+        )}
       </div>
 
       <aside>

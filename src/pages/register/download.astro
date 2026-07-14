@@ -3,15 +3,15 @@ import Base from '../../layouts/Base.astro';
 import { EDITIONS } from '../../data/looted';
 
 const formats = [
-  { name: 'CSV', body: 'Flat table, one row per volume. 2,614 rows.', action: 'download ↓' },
+  { name: 'CSV', body: 'Flat table, one row per title. More than 2,100 identified so far.', action: 'download ↓' },
   { name: 'JSON', body: 'Nested evidence chains, for reuse in other systems.', action: 'download ↓' },
-  { name: 'DOI', body: '10.5072/penn-looted-books. Cite the edition.', action: 'copy ⧉' },
+  { name: 'DOI', body: 'A citable DOI will be minted for the first public edition.', action: 'planned' },
 ];
 ---
 <Base title="Download the register — Nazi Looted Books" crumb="/register/download/" active="register">
   <div style="max-width:760px">
     <h1 style="margin:14px 0 0;font:400 33px/1.05 var(--display);text-transform:uppercase;letter-spacing:.02em">Download the register</h1>
-    <p style="margin:16px 0 0;font:400 16.5px/1.55 var(--serif);color:var(--mut)">The full dataset is open. Each edition is versioned and citable, so a claim you make against it today can be checked against the same rows tomorrow.</p>
+    <p style="margin:16px 0 0;font:400 16.5px/1.55 var(--serif);color:var(--mut)">The dataset will be published openly and versioned, so a claim you make against it today can be checked against the same rows tomorrow. The shelf read is not yet complete.</p>
 
     <div style="margin-top:26px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px">
       {formats.map((f) => (
