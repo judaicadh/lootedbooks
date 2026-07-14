@@ -296,6 +296,7 @@ export const urls = {
   gaps: '/about/gaps/',
   method: '/about/method/',
   steps: '/about/steps/',
+  essay: '/about/essay/',
   markings: '/markings/',
   marking: (slug: string) => `/markings/${slug}/`,
   anatomy: '/markings/anatomy/',
