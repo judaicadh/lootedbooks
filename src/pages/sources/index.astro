@@ -7,7 +7,7 @@ const pillStyle = (active: boolean) =>
 ---
 <Base title="Sources & databases — Nazi Looted Books" crumb="/sources/" active="sources">
   <h1 style="margin:14px 0 0;font:400 33px/1.05 var(--display);text-transform:uppercase;letter-spacing:.02em">Sources &amp; databases</h1>
-  <p style="margin:16px 0 0;max-width:640px;font:400 16.5px/1.55 var(--serif);color:var(--mut)">The record only holds because it points outward. These are the sources we reason against — grouped by the question they help answer.</p>
+  <p style="margin:16px 0 0;max-width:660px;font:400 16.5px/1.55 var(--serif);color:var(--mut)">The record only holds because it points outward. These are the sources Bruce Nielsen reasons against — the exact resources cited in his essay, linked. Filter by the question they help answer.</p>
 
   <div data-src-filters style="margin-top:26px;display:flex;gap:10px;flex-wrap:wrap">
     {SOURCE_CATS.map((c) => (
@@ -19,11 +19,15 @@ const pillStyle = (active: boolean) =>
     {SOURCES.map((s) => (
       <div data-type={s.type} style="background:var(--sf);border:1px solid rgba(var(--inkrgb),.14);border-radius:4px;padding:18px 20px">
         <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px">
-          <div style="font:500 15.5px/1.3 var(--sans);color:var(--ink)">{s.name} <span style="color:var(--ac)">↗</span></div>
+          {s.url ? (
+            <a href={s.url} target="_blank" rel="noopener noreferrer" style="font:500 15.5px/1.35 var(--sans);color:var(--ac)">{s.name} ↗</a>
+          ) : (
+            <div style="font:500 15.5px/1.35 var(--sans);color:var(--ink)">{s.name}</div>
+          )}
           <span style="font:400 10px/1 'IBM Plex Mono',monospace;color:var(--fn);white-space:nowrap">{s.type}</span>
         </div>
         <div style="margin-top:8px;font:400 13.5px/1.5 var(--serif);color:var(--mut)">Answers: {s.question}</div>
-        <div style="margin-top:6px;font:400 11.5px/1 'IBM Plex Mono',monospace;color:var(--fn)">{s.region}</div>
+        <div style="margin-top:6px;font:400 11.5px/1 'IBM Plex Mono',monospace;color:var(--fn)">{s.region}{s.url ? '' : ' · not online'}</div>
       </div>
     ))}
   </div>

@@ -160,21 +160,44 @@ export const CASES: Case[] = [
     recordId: null, recordLabel: 'see the Gaps page' },
 ];
 
+// Sources exactly as cited in Bruce Nielsen's essay, with his links.
 export const SOURCES: Source[] = [
-  { name: 'Yad Vashem — Names Database', type: 'victims', region: 'international', question: 'Who owned this book?' },
-  { name: 'USHMM — Survivors & Victims Database', type: 'victims', region: 'international', question: 'Who owned this book?' },
-  { name: 'Bundesarchiv Gedenkbuch', type: 'victims', region: 'Germany', question: 'Who was the owner, and their fate?' },
-  { name: 'Looted Cultural Assets', type: 'victims', region: 'Germany', question: 'Whose bookplate is this?' },
-  { name: 'JewishGen — Yizkor & community lists', type: 'victims', region: 'Eastern Europe', question: 'Which community, and who lived there?' },
-  { name: 'OAD monthly reports (NARA / fold3)', type: 'shipping', region: 'Germany / U.S.', question: 'Was it sent here, and when?' },
-  { name: 'OAD list — 582 Jewish libraries (Sep 1946)', type: 'shipping', region: 'Germany', question: 'Which institution held it? (58,667 books)' },
-  { name: 'OAD list — 35 libraries (Jul 1946)', type: 'shipping', region: 'Germany', question: 'Which institution held it? (33,499 books)' },
-  { name: '“Privately-owned Book Collections,” Wiesbaden (1949)', type: 'shipping', region: 'Germany', question: 'Whose private library was it?' },
+  // Victim & name databases
+  { name: 'Yad Vashem — Central Database of Shoah Victims’ Names', type: 'victims', region: 'international', question: 'Who owned this book?', url: 'https://yvng.yadvashem.org/' },
+  { name: 'USHMM — Holocaust Survivors and Victims Database', type: 'victims', region: 'international', question: 'Who owned this book?', url: 'https://www.ushmm.org/online/hsv/person_advance_search.php' },
+  { name: 'Claims Conference / Bundesarchiv — Gedenkbuch (Memorial Book)', type: 'victims', region: 'Germany', question: 'Who was the owner, and their fate?', url: 'https://www.bundesarchiv.de/gedenkbuch/en1041664' },
+  { name: 'JewishGen — Holocaust Database', type: 'victims', region: 'international', question: 'Who owned this book?', url: 'https://www.jewishgen.org/databases/Holocaust/' },
+  { name: 'Looted Cultural Assets', type: 'victims', region: 'Germany', question: 'Whose bookplate is this?', url: 'https://lootedculturalassets.de/' },
+  { name: 'Tentative List of Jewish Cultural Treasures in Axis-Occupied Countries', type: 'victims', region: 'Europe', question: 'Whose collection was it?', url: 'https://www.lootedart.com' },
+  { name: 'German Lost Art Foundation', type: 'victims', region: 'Germany', question: 'Whose collection was it?', url: 'https://www.lostart.de/en/' },
+  { name: 'Stolpersteine Project', type: 'victims', region: 'Europe', question: 'Who lived here, and their fate?', url: 'https://www.stolpersteine.eu/en/home/' },
+  { name: 'Memorial to the Murdered Jews of Europe — Room of Names', type: 'victims', region: 'Europe', question: 'Who was this person?', url: 'https://www.holocaust-denkmal-berlin.de/raum-der-namen/biographien/' },
+  { name: 'Joods Monument — Dutch victims of the Nazis', type: 'victims', region: 'Netherlands', question: 'Who owned this book?', url: 'https://www.joodsmonument.nl/' },
+  { name: 'KehilaLinks (JewishGen) — community pages', type: 'victims', region: 'Europe', question: 'Which community, and who lived there?', url: 'https://kehilalinks.jewishgen.org/' },
+  { name: 'JDCRP — Documentation of Persecuted Jewish Collectors', type: 'victims', region: 'Europe', question: 'Whose private collection was it?', url: 'http://jdcrp.org/documentation-of-persecuted-jewish-collectors/' },
+  { name: 'ERR Project — reconstruction of looted libraries', type: 'victims', region: 'Western Europe', question: 'Which library did the ERR take it from?', url: 'https://www.errproject.org/looted_libraries_fr_lists.php' },
+  // OAD & institutional library lists
+  { name: 'OAD Monthly Reports (fold3)', type: 'shipping', region: 'Offenbach', question: 'Was it sent here, and when?', url: 'https://www.fold3.com/image/232711531' },
+  { name: '“Institutional Library Collections – Germany,” 67 libraries (31 Mar 1946)', type: 'shipping', region: 'Germany', question: 'Which institution held it?', url: 'https://www.fold3.com/image/270207612' },
+  { name: '35 institutional Jewish libraries in Germany, total 33,499 (31 Jul 1946)', type: 'shipping', region: 'Germany', question: 'Which institution held it?', url: 'https://www.fold3.com/image/232711619' },
+  { name: 'OAD list of 582 Jewish libraries, total 58,667 (30 Sep 1946)', type: 'shipping', region: 'Germany', question: 'Which institution held it?', url: 'https://www.fold3.com/image/232711733' },
+  { name: '“List of the Privately-owned (identifiable) Book Collections,” Wiesbaden (Oct 1949)', type: 'shipping', region: 'Germany', question: 'Whose private library was it?', url: 'https://www.fold3.com/image/232025073' },
+  { name: 'RSHA — Reichssicherheitshauptamt, Bibliothek', type: 'shipping', region: 'Germany', question: 'Which library did the RSHA take it from?', url: 'https://provenienz.gbv.de/Deutsches_Reich._Reichssicherheitshauptamt._Bibliothek' },
+  // Stamp identification & background
+  { name: 'Bencowitz — Library Markings, vol. I (Eastern), NLI', type: 'reference', region: 'Offenbach', question: 'What stamp is this?', url: 'https://www.nli.org.il/en/archives/NNL_ARCHIVE_AL003531216/NLI' },
+  { name: 'Bencowitz — Library Markings, vol. II (Western), NLI', type: 'reference', region: 'Offenbach', question: 'What stamp is this?', url: 'https://www.nli.org.il/en/archives/NNL_ARCHIVE_AL003925829/NLI' },
+  { name: 'Michael Krupp, “Schicksal von Büchern” (2014)', type: 'reference', region: 'Germany', question: 'What stamp is this?', url: 'https://lee-achim.de/html/i-faith/rii1412.pdf' },
+  { name: 'PCHA — Plunder and Restitution (2000)', type: 'reference', region: 'U.S.', question: 'How did this material reach the U.S.?', url: 'https://govinfo.library.unt.edu/pcha/PlunderRestitution.html/html/Home_Contents.html' },
   { name: 'Freidus Classification Shelf List (Dropsie)', type: 'bibliographic', region: 'Philadelphia', question: 'Was it sourced as a JCR gift?' },
   { name: 'Rare-manuscripts accession list (Dropsie)', type: 'bibliographic', region: 'Philadelphia', question: 'Did the manuscript come from JCR?' },
-  { name: 'Bencowitz, Library Markings (1946), NLI', type: 'reference', region: 'Offenbach', question: 'What stamp is this?' },
+  // Baltic & Eastern European
+  { name: 'Josef Rosin, Protecting Our Litvak Heritage (2009)', type: 'baltic', region: 'Lithuania', question: 'Which Lithuanian community?', url: 'https://www.jewishgen.org/yizkor/lithuania6/lithuania6.html' },
+  { name: 'JewishGen — Yizkor Book Project', type: 'baltic', region: 'Eastern Europe', question: 'Which community, and who lived there?', url: 'https://www.jewishgen.org/yizkor/' },
+  { name: 'Database of victims in Czechoslovakia', type: 'baltic', region: 'Czechoslovakia', question: 'Who owned this book?', url: 'https://www.holocaust.cz/en/main-2/' },
+  { name: 'JRI-Poland — Jewish records', type: 'baltic', region: 'Poland', question: 'Who owned this book?', url: 'https://jri-poland.org/' },
+  { name: 'JDC — Prague Emigration Case File Index (1945–50)', type: 'baltic', region: 'Czechoslovakia', question: 'Where did the owner go?', url: 'https://archives.jdc.org/wp-content/uploads/2020/07/AJDC-Prague-Emigration-Case-File-Index.pdf' },
 ];
-export const SOURCE_CATS = ['all', 'victims', 'shipping', 'bibliographic', 'reference'];
+export const SOURCE_CATS = ['all', 'victims', 'shipping', 'reference', 'bibliographic', 'baltic'];
 
 // The one personal library resolved to a named owner in the register so far.
 // Kremer's volumes are the pink-flagged rows of the Lithuanian sheet; their
